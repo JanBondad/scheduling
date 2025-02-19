@@ -1,0 +1,151 @@
+[2025-02-18 13:24:39] ERROR: Connection failed: Unknown database 'silp'
+[2025-02-18 13:25:46] Database connection successful
+[2025-02-18 13:25:46] POST data received: Array
+(
+)
+
+[2025-02-18 13:25:46] ERROR: Wedding date and time are required
+[2025-02-18 13:25:46] Connection closed
+[2025-02-18 13:28:33] Database connection successful
+[2025-02-18 13:28:33] POST data received: Array
+(
+)
+
+[2025-02-18 13:28:33] ERROR: Wedding date and time are required
+[2025-02-18 13:28:33] Connection closed
+[2025-02-18 13:28:40] Database connection successful
+[2025-02-18 13:28:40] POST data received: Array
+(
+)
+
+[2025-02-18 13:28:40] ERROR: Wedding date and time are required
+[2025-02-18 13:28:40] Connection closed
+[2025-02-18 13:29:22] Database connection successful
+[2025-02-18 13:29:22] POST data received: Array
+(
+)
+
+[2025-02-18 13:29:22] ERROR: Wedding date and time are required
+[2025-02-18 13:29:22] Connection closed
+[2025-02-18 13:29:26] Database connection successful
+[2025-02-18 13:29:26] POST data received: Array
+(
+)
+
+[2025-02-18 13:29:26] ERROR: Wedding date and time are required
+[2025-02-18 13:29:26] Connection closed
+[2025-02-18 13:30:15] Database connection successful
+[2025-02-18 13:30:15] POST data received: Array
+(
+)
+
+[2025-02-18 13:30:15] ERROR: Both bride and groom names are required
+[2025-02-18 13:30:15] Connection closed
+[2025-02-18 13:31:22] Database connection successful
+[2025-02-18 13:31:22] POST data received: Array
+(
+)
+
+[2025-02-18 13:31:22] Filtered data prepared for insertion
+[2025-02-18 13:31:22] SQL statement prepared successfully
+[2025-02-18 13:31:22] Connection closed
+[2025-02-18 13:33:05] Database connection successful
+[2025-02-18 13:33:05] POST data received: Array
+(
+)
+
+[2025-02-18 13:33:05] Filtered data prepared for insertion
+[2025-02-18 13:33:05] SQL statement prepared successfully
+[2025-02-18 13:33:05] Connection closed
+[2025-02-18 13:34:10] Database connection successful
+[2025-02-18 13:34:10] POST data received: Array
+(
+)
+
+[2025-02-18 13:34:10] Filtered data prepared for insertion
+[2025-02-18 13:34:10] Number of parameters needed: 46
+[2025-02-18 13:34:10] Length of types string: 46
+[2025-02-18 13:34:10] Parameters bound successfully
+[2025-02-18 13:34:10] Record inserted successfully. Insert ID: 1
+[2025-02-18 13:34:10] Connection closed
+[2025-02-18 13:35:15] Database connection successful
+[2025-02-18 13:35:15] POST data received: Array
+(
+)
+
+[2025-02-18 13:35:15] Filtered data prepared for insertion
+[2025-02-18 13:35:15] Number of parameters needed: 46
+[2025-02-18 13:35:15] Length of types string: 46
+[2025-02-18 13:35:15] Record inserted successfully. Insert ID: 2
+[2025-02-18 13:35:15] Connection closed
+[2025-02-18 13:37:43] Database connection successful
+[2025-02-18 13:37:43] POST data received: Array
+(
+)
+
+[2025-02-18 13:37:43] Filtered data prepared for insertion
+[2025-02-18 13:37:43] Number of parameters needed: 46
+[2025-02-18 13:37:43] Length of types string: 46
+[2025-02-18 13:37:43] Record inserted successfully. Insert ID: 3
+[2025-02-18 13:37:43] Connection closed
+[2025-02-18 13:39:57] Database connection successful
+[2025-02-18 13:39:57] POST data received: Array
+(
+)
+
+[2025-02-18 13:39:57] SQL statement prepared successfully
+[2025-02-18 13:39:57] Number of parameters: 46
+[2025-02-18 13:39:57] Parameters bound successfully
+[2025-02-18 13:39:57] Record inserted successfully. Insert ID: 4
+[2025-02-18 13:39:57] Connection closed
+[2025-02-18 13:44:02] ERROR: Connection failed: Unknown database 'silp'
+[2025-02-18 13:45:11] Database connection successful
+[2025-02-18 13:45:11] POST data received: Array
+(
+)
+
+[2025-02-18 13:45:11] SQL statement prepared successfully
+[2025-02-18 13:45:11] Number of parameters: 46
+[2025-02-18 13:45:11] Parameters bound successfully
+[2025-02-18 13:45:11] Record inserted successfully. Insert ID: 5
+[2025-02-18 13:45:11] Connection closed
+[2025-02-18 13:45:42] Database connection successful
+[2025-02-18 13:45:42] POST data received: Array
+(
+)
+
+[2025-02-18 13:45:42] SQL statement prepared successfully
+[2025-02-18 13:45:42] Number of parameters: 46
+[2025-02-18 13:45:42] Parameters bound successfully
+[2025-02-18 13:45:42] Record inserted successfully. Insert ID: 6
+[2025-02-18 13:45:42] Connection closed
+[2025-02-18 13:47:18] Database connection successful
+[2025-02-18 13:47:18] POST data received: Array
+(
+)
+
+[2025-02-18 13:47:18] SQL statement prepared successfully
+[2025-02-18 13:47:18] Number of parameters: 46
+[2025-02-18 13:47:18] Parameters bound successfully
+[2025-02-18 13:47:18] Record inserted successfully. Insert ID: 7
+[2025-02-18 13:47:18] Connection closed
+[2025-02-18 13:50:23] ERROR: Invalid request method
+[2025-02-18 13:50:23] Connection closed
+[2025-02-18 13:52:20] Request Method: GET
+[2025-02-18 13:52:20] Database connection successful
+[2025-02-18 13:52:20] SQL statement prepared successfully
+[2025-02-18 13:52:20] Number of parameters: 46
+[2025-02-18 13:52:20] Parameters bound successfully
+[2025-02-18 13:52:20] Record inserted successfully. Insert ID: 8
+[2025-02-18 13:52:20] Connection closed
+[2025-02-18 13:52:40] Request Method: GET
+[2025-02-18 13:52:40] Database connection successful
+[2025-02-18 13:52:40] SQL statement prepared successfully
+[2025-02-18 13:52:40] Number of parameters: 46
+[2025-02-18 13:52:40] Parameters bound successfully
+[2025-02-18 13:52:40] Record inserted successfully. Insert ID: 9
+[2025-02-18 13:52:40] Connection closed
+[2025-02-18 13:55:01] Form not submitted - submit button not clicked
+[2025-02-18 13:55:03] Form not submitted - submit button not clicked
+[2025-02-18 13:55:08] Form not submitted - submit button not clicked
+[2025-02-18 13:55:10] Form not submitted - submit button not clicked
