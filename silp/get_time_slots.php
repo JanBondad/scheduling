@@ -3,16 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database Configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "u493132415_pasiginaenae";
-
-// Database Connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die(json_encode(['error' => "Connection failed: " . $conn->connect_error]));
-}
+include 'dbConnection.php';
 
 // Get parameters
 $service = isset($_GET['service']) ? $_GET['service'] : '';
