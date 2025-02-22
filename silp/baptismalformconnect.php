@@ -2,6 +2,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Database Configuration
+include 'dbConnection.php';
+
 // Check request method and content type first
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     die("Error: Invalid request method");
@@ -20,13 +23,6 @@ foreach ($required_fields as $field) {
     if (!isset($_POST[$field]) || empty($_POST[$field])) {
         die("Error: Missing required field - $field");
     }
-}
-
-// Database connection
-$con = mysqli_connect('localhost', 'root', '', 'u493132415_pasiginaenae');
-
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
 }
 
 // Handle file upload
@@ -64,39 +60,39 @@ if(isset($_FILES['bcert']) && $_FILES['bcert']['error'] === UPLOAD_ERR_OK) {
 }
 
 // Retrieve form data
-$bapfname = mysqli_real_escape_string($con, $_POST['bapfname']);
-$bapmname = mysqli_real_escape_string($con, $_POST['bapmname']);
-$baplname = mysqli_real_escape_string($con, $_POST['baplname']);
-$bapdbirth = mysqli_real_escape_string($con, $_POST['bapdbirth']);
-$bappbirth = mysqli_real_escape_string($con, $_POST['bappbirth']);
-$bapnationality = mysqli_real_escape_string($con,  $_POST['bapnationality']);
-$ffname = mysqli_real_escape_string($con, $_POST['ffname']);
-$fmname = mysqli_real_escape_string($con, $_POST['fmname']);
-$flname = mysqli_real_escape_string($con, $_POST['flname']);
-$bapfpbirth = mysqli_real_escape_string($con, $_POST['bapfpbirth']);
-$fresidence = mysqli_real_escape_string($con, $_POST['fresidence']);
-$bapfstatus = mysqli_real_escape_string($con, $_POST['bapfstatus']);
-$mfname = mysqli_real_escape_string($con, $_POST['mfname']);
-$mmname = mysqli_real_escape_string($con, $_POST['mmname']);
-$mlname = mysqli_real_escape_string($con, $_POST['mlname']);
-$bapmpbirth = mysqli_real_escape_string($con, $_POST['bapmpbirth']);
-$mresidence = mysqli_real_escape_string($con, $_POST['mresidence']);
-$bapmstatus = mysqli_real_escape_string($con, $_POST['bapmstatus']);
-$mpsponsors = mysqli_real_escape_string($con, $_POST['mpsponsors']);
-$fpsponsors = mysqli_real_escape_string($con, $_POST['fpsponsors']);
-$sponsors3 = mysqli_real_escape_string($con, $_POST['sponsors3']);
-$sponsors4 = mysqli_real_escape_string($con, $_POST['sponsors4']);
-$sponsors5 = mysqli_real_escape_string($con, $_POST['sponsors5']);
-$sponsors6 = mysqli_real_escape_string($con, $_POST['sponsors6']);
-$sponsors7 = mysqli_real_escape_string($con, $_POST['sponsors7']);
-$sponsors8 = mysqli_real_escape_string($con, $_POST['sponsors8']);
-$bapdatetime = mysqli_real_escape_string($con, $_POST['bapdatetime']);
-$baploc = mysqli_real_escape_string($con, $_POST['baploc']);
-$bapriest = mysqli_real_escape_string($con, $_POST['bapriest']);
-$bapemail = mysqli_real_escape_string($con, $_POST['bapemail']);
-$bapcontact = mysqli_real_escape_string($con, $_POST['bapcontact']);
-$baptype = isset($_POST['baptype']) ? mysqli_real_escape_string($con, $_POST['baptype']) : 'regular';
-$reserveby = mysqli_real_escape_string($con, $_POST['reserveby']);
+$bapfname = mysqli_real_escape_string($conn, $_POST['bapfname']);
+$bapmname = mysqli_real_escape_string($conn, $_POST['bapmname']);
+$baplname = mysqli_real_escape_string($conn, $_POST['baplname']);
+$bapdbirth = mysqli_real_escape_string($conn, $_POST['bapdbirth']);
+$bappbirth = mysqli_real_escape_string($conn, $_POST['bappbirth']);
+$bapnationality = mysqli_real_escape_string($conn,  $_POST['bapnationality']);
+$ffname = mysqli_real_escape_string($conn, $_POST['ffname']);
+$fmname = mysqli_real_escape_string($conn, $_POST['fmname']);
+$flname = mysqli_real_escape_string($conn, $_POST['flname']);
+$bapfpbirth = mysqli_real_escape_string($conn, $_POST['bapfpbirth']);
+$fresidence = mysqli_real_escape_string($conn, $_POST['fresidence']);
+$bapfstatus = mysqli_real_escape_string($conn, $_POST['bapfstatus']);
+$mfname = mysqli_real_escape_string($conn, $_POST['mfname']);
+$mmname = mysqli_real_escape_string($conn, $_POST['mmname']);
+$mlname = mysqli_real_escape_string($conn, $_POST['mlname']);
+$bapmpbirth = mysqli_real_escape_string($conn, $_POST['bapmpbirth']);
+$mresidence = mysqli_real_escape_string($conn, $_POST['mresidence']);
+$bapmstatus = mysqli_real_escape_string($conn, $_POST['bapmstatus']);
+$mpsponsors = mysqli_real_escape_string($conn, $_POST['mpsponsors']);
+$fpsponsors = mysqli_real_escape_string($conn, $_POST['fpsponsors']);
+$sponsors3 = mysqli_real_escape_string($conn, $_POST['sponsors3']);
+$sponsors4 = mysqli_real_escape_string($conn, $_POST['sponsors4']);
+$sponsors5 = mysqli_real_escape_string($conn, $_POST['sponsors5']);
+$sponsors6 = mysqli_real_escape_string($conn, $_POST['sponsors6']);
+$sponsors7 = mysqli_real_escape_string($conn, $_POST['sponsors7']);
+$sponsors8 = mysqli_real_escape_string($conn, $_POST['sponsors8']);
+$bapdatetime = mysqli_real_escape_string($conn, $_POST['bapdatetime']);
+$baploc = mysqli_real_escape_string($conn, $_POST['baploc']);
+$bapriest = mysqli_real_escape_string($conn, $_POST['bapriest']);
+$bapemail = mysqli_real_escape_string($conn, $_POST['bapemail']);
+$bapcontact = mysqli_real_escape_string($conn, $_POST['bapcontact']);
+$baptype = isset($_POST['baptype']) ? mysqli_real_escape_string($conn, $_POST['baptype']) : 'regular';
+$reserveby = mysqli_real_escape_string($conn, $_POST['reserveby']);
 
 
 // Insert data into database
@@ -105,15 +101,15 @@ VALUES ('$bapfname', '$bapmname', '$baplname', '$bapdbirth', '$bappbirth', '$bap
 
 
 // Execute the query and check for errors
-if (mysqli_query($con, $query)) {
+if (mysqli_query($conn, $query)) {
     // Redirect to success page instead of returning JSON
     header('Location: success.php');
     exit();
 } else {
     header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => mysqli_error($con)]);
+    echo json_encode(['status' => 'error', 'message' => mysqli_error($conn)]);
 }
 
 // Close connection
-mysqli_close($con);
+mysqli_close($conn);
 ?>

@@ -3,11 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database connection
-$con = mysqli_connect('localhost', 'root', '', 'u493132415_pasiginaenae');
-
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include 'dbConnection.php';
 
 // Handle file upload
 $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/burial/';
@@ -40,30 +36,30 @@ if(isset($_FILES['bdeathcert']) && $_FILES['bdeathcert']['error'] === UPLOAD_ERR
 }
 
 // Capture form data and sanitize inputs
-$bname = mysqli_real_escape_string($con, $_POST['bname'] ?? '');
-$bage = mysqli_real_escape_string($con, $_POST['bage'] ?? '');
-$bdatedeath = mysqli_real_escape_string($con, $_POST['bdatedeath'] ?? '');
-$bdatetime = mysqli_real_escape_string($con, $_POST['bdatetime'] ?? '');
-$bparish = mysqli_real_escape_string($con, $_POST['bparish'] ?? '');
-$blfuneral = mysqli_real_escape_string($con, $_POST['blfuneral'] ?? '');
-$breserve = mysqli_real_escape_string($con, $_POST['breserve'] ?? '');
-$bemail = mysqli_real_escape_string($con, $_POST['bemail'] ?? '');
-$bcontact = mysqli_real_escape_string($con, $_POST['bcontact'] ?? '');
+$bname = mysqli_real_escape_string($conn, $_POST['bname'] ?? '');
+$bage = mysqli_real_escape_string($conn, $_POST['bage'] ?? '');
+$bdatedeath = mysqli_real_escape_string($conn, $_POST['bdatedeath'] ?? '');
+$bdatetime = mysqli_real_escape_string($conn, $_POST['bdatetime'] ?? '');
+$bparish = mysqli_real_escape_string($conn, $_POST['bparish'] ?? '');
+$blfuneral = mysqli_real_escape_string($conn, $_POST['blfuneral'] ?? '');
+$breserve = mysqli_real_escape_string($conn, $_POST['breserve'] ?? '');
+$bemail = mysqli_real_escape_string($conn, $_POST['bemail'] ?? '');
+$bcontact = mysqli_real_escape_string($conn, $_POST['bcontact'] ?? '');
 
 // Insert data into the burial table
-$query = "INSERT INTO BURIAL (full_name, age, date_of_death, funeral_date, parish, funeral_location, reserver_name, email, contact_no, death_certificate) 
+$query = "INSERT INTO burial (full_name, age, date_of_death, funeral_date, parish, funeral_location, reserver_name, email, contact_no, death_certificate) 
 VALUES ('$bname', '$bage', '$bdatedeath', '$bdatetime', '$bparish', '$blfuneral', '$breserve', '$bemail', '$bcontact', '$bdeathcert')";
 
 // Execute the query and check for errors
-if (mysqli_query($con, $query)) {
+if (mysqli_query($conn, $query)) {
     // Redirect to success page instead of returning JSON
     header('Location: success.php');
     exit();
 } else {
     header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => mysqli_error($con)]);
+    echo json_encode(['status' => 'error', 'message' => mysqli_error($conn)]);
 }
 
 // Close connection
-mysqli_close($con);
+mysqli_close($conn);
 ?>

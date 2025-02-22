@@ -3,21 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database Configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "u493132415_pasiginaenae";
-
-// Database Connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// At the top of your file, after database connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include 'dbConnection.php';
 
 // Verify table exists
 $checkTable = $conn->query("SHOW TABLES LIKE 'bookings'");
