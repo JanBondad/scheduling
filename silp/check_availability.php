@@ -1,64 +1,74 @@
 <?php
-require_once 'db_connection.php'; // Create this file with your database connection code
+require_once 'dbConnection.php'; // Ensure this file correctly establishes the DB connection
+
+header('Content-Type: application/json');
 
 $date = $_GET['date'] ?? null;
 $service = $_GET['service'] ?? null;
-$time = $_GET['time'] ?? null;
 
-if (!$date || !$service || !$time) {
+if (!$date || !$service) {
     echo json_encode(['error' => 'Missing parameters']);
     exit;
 }
 
-// Get available slots
-$sql = "SELECT sts.max_slots - COUNT(b.id) as available_slots
-        FROM service_time_slots sts
-        LEFT JOIN bookings b ON b.service_type = sts.service_type 
-            AND b.time_slot = sts.time_slot 
-            AND b.date = ?
-            AND b.status != 'cancelled'
-        WHERE sts.service_type = ?
-            AND sts.time_slot = ?
-        GROUP BY sts.time_slot";
+$timeSlots = [];
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sss", $date, $service, $time);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+if ($service === "Funeral") {
+    // Ensure the time format is HH:MM:SS (without microseconds)
+    $stmt = $conn->prepare("SELECT DATE_FORMAT(funeral_date, '%H:%i:%s') as funeral_time, COUNT(*) as count FROM burial WHERE DATE(funeral_date) = ? GROUP BY funeral_time");
 
-echo json_encode([
-    'available_slots' => $row ? $row['available_slots'] : 0
-]); 
+    if ($stmt) {
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-function getDateAvailability($conn, $date, $church_id) {
-    $sql = "SELECT 
-                sts.service_type,
-                sts.time_slot,
-                sts.max_slots,
-                COUNT(b.id) as booked_slots,
-                sts.max_slots - COUNT(b.id) as available_slots
-            FROM service_time_slots sts
-            LEFT JOIN bookings b ON b.service_type = sts.service_type 
-                AND b.time_slot = sts.time_slot 
-                AND b.date = ?
-                AND b.church_id = ?
-                AND b.status != 'cancelled'
-            GROUP BY sts.service_type, sts.time_slot";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $date, $church_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    $availability = [];
-    while ($row = $result->fetch_assoc()) {
-        $availability[$row['service_type']][$row['time_slot']] = [
-            'max' => $row['max_slots'],
-            'booked' => $row['booked_slots'],
-            'available' => $row['available_slots']
-        ];
+        while ($row = $result->fetch_assoc()) {
+            $timeSlots[$row['funeral_time']] = (int) $row['count'];
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(['error' => 'Query preparation failed']);
+        exit;
     }
-    
-    return $availability;
-} 
+} else if ($service === "Wedding") {
+    // Ensure the time format is HH:MM:SS (without microseconds)
+    $stmt = $conn->prepare("SELECT DATE_FORMAT(date_time, '%H:%i:%s') as date_time, COUNT(*) as count FROM matrimony WHERE DATE(date_time) = ? GROUP BY date_time");
+
+    if ($stmt) {
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $timeSlots[$row['date_time']] = (int) $row['count'];
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(['error' => 'Query preparation failed']);
+        exit;
+    }
+} else if ($service === "Baptismal") {
+    // Ensure the time format is HH:MM:SS (without microseconds)
+    $stmt = $conn->prepare("SELECT DATE_FORMAT(date_time, '%H:%i:%s') as date_time, COUNT(*) as count FROM baptism WHERE DATE(date_time) = ? GROUP BY date_time");
+
+    if ($stmt) {
+        $stmt->bind_param("s", $date);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $timeSlots[$row['date_time']] = (int) $row['count'];
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(['error' => 'Query preparation failed']);
+        exit;
+    }
+}
+
+// Return JSON object with properly formatted keys
+echo json_encode($timeSlots);
+?>
